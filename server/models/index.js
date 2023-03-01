@@ -1,3 +1,4 @@
+const User = require('./User');
+const Thread = require('./Thread')
 
-
-module.exports = { };
+module.exports = { User, Thread };
