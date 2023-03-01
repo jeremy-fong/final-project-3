@@ -1,11 +1,15 @@
 import React from 'react';
+import Header from '../components/Header';
 
 const Home = () => {
   
   return (
-    <div className="card bg-white card-rounded w-50">
-      HOME
-    </div>
+      <>
+        <div>
+          <Header/>
+          HOME
+        </div>
+      </>
   );
 };
 
