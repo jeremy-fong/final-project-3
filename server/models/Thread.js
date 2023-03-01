@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const commentSchema = require('./Comment')
 const dateFormat = require('../utils/dateFormat');
 
 const threadSchema = new Schema(
@@ -17,7 +18,7 @@ const threadSchema = new Schema(
             type: String,
             required: true
         },
-        reactions: [reactionSchema]
+        comments: [commentSchema]
     },
     {
         toJSON: {
@@ -26,5 +27,9 @@ const threadSchema = new Schema(
         if: false
     }
 )
+
+threadSchema.virtual('commentCount').get(function () {
+    return this.comments.length;
+})
 
 module.exports = threadSchema;
