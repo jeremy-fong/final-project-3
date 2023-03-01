@@ -24,7 +24,7 @@ const threadSchema = new Schema(
         toJSON: {
             getters: true
         },
-        if: false
+        id: false
     }
 )
 
