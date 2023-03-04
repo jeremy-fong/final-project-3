@@ -28,6 +28,6 @@ To deploy the application
 
 
 ## Contributors :
-- ![Xenon789](https://github.com/Xenon789/)
-- ![andrewn822](https://github.com/andrewn822)
-- ![jeremy-fong](https://github.com/jeremy-fong)
+- [Xenon789](https://github.com/Xenon789/)
+- [andrewn822](https://github.com/andrewn822)
+- [jeremy-fong](https://github.com/jeremy-fong)
