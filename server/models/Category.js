@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
-const threadSchema = require('./Thread')
-const dateFormat = require('../utils/dateFormat');
+const threadSchema = require('./Thread');
 
 const categorySchema = new Schema(
     {
