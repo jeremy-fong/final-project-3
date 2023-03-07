@@ -1,7 +1,7 @@
 const { Thread, User } = require('../models');
 
 // function to find all threads
-const getthreads = (req, res) => {
+const getThreads = (req, res) => {
     Thread.find()
         .sort({ createdAt: -1 })
         .then((threads) => {
