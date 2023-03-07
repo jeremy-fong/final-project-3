@@ -6,7 +6,7 @@ const Signup = () => {
   return (
       <>
         <div>
-          <Header/>
+          <Header />
           HOME
         </div>
       </>

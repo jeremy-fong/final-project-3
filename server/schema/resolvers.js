@@ -27,10 +27,11 @@ const resolvers = {
             if (!correctPass) {
                 throw new AuthenticationError('Incorrect Password. Please Try Again.')
             }
-
+s
             const token = signToken(user);
             return { token, user };
-        }
+        },
+        
     },
 }
 
