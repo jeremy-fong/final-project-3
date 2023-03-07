@@ -27,11 +27,20 @@ const resolvers = {
             if (!correctPass) {
                 throw new AuthenticationError('Incorrect Password. Please Try Again.')
             }
-s
+
             const token = signToken(user);
             return { token, user };
         },
-        
+        createThread: async (parent, args) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { createdThreads: threadId }},
+                    { new: true }
+                )
+                return updatedUser;
+            }
+        }
     },
 }
 
