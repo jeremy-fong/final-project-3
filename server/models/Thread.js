@@ -4,15 +4,18 @@ const dateFormat = require('../utils/dateFormat');
 
 const threadSchema = new Schema(
     {
+        threadTitle: {
+            type: String,
+            required: 'Please try again!',
+            maxlength: 25
+        },
         threadText: {
             type: String,
             required: 'Please try again!',
             minlength: 25
         },
         createdAt: {
-            type: Date,
-            default: Date.now,
-            get: timeStamp => dateFormat(timeStamp)
+            type: Date
         },
         username: {
             type: String,

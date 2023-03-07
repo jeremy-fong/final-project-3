@@ -10,13 +10,13 @@ const typeDefs = gql`
     _id: ID
     commentBody: String
     username: String
-    createdAt: Date
+    createdAt: String
    }
 
    type Thread {
     _id: ID
     threadText: String
-    createdAt: Date
+    createdAt: String
     username: String
    }
 
@@ -28,7 +28,30 @@ const typeDefs = gql`
       email: String
       threads: [Thread]
       followers: [User]
-    }
+   }
+
+   type Auth {
+      token: ID!
+      user: User
+   }
+
+   type Query {
+      me: User
+   }
+
+   input threadInput {
+      creator: String
+      threadId: String
+      title: String
+      text: String
+   }
+
+   type Mutation {
+      login(email: String!, password: String!): Auth
+      addUser(username: String!, email: String!, password: String!): Auth
+      createThread(thread: threadInput): User
+      removeThread(threadId: String!): User
+   }
 
 `
 module.exports = typeDefs
