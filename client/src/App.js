@@ -25,10 +25,10 @@ function App() {
 
           <Navbar placeholder='search uforumit'/>
           <Routes>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" element={<Home />} />
             
-            <Route exact path="login" component={Login} />
-            <Route exact path="signup" component={Signup} />
+            <Route exact path="login" element={<Login />} />
+            <Route exact path="signup" element={<Signup />} />
           </Routes>
 
         </div>
