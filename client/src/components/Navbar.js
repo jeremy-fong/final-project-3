@@ -22,7 +22,7 @@ function Navbar({placeholder, data}) {
         </div>
 
         <div className='rightSide'>
-            <Link to='/signup'>Signup</Link>
+            <Link to='/signup'>Sign-up</Link>
             <Link to='/login'>Login</Link>
         </div>
 

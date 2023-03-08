@@ -9,10 +9,28 @@ const {
     removeFollower
 } = require('../../controllers/user-controller');
 
+const {
+    getThreads,
+    getOneThread,
+    createThread,
+    updateThread,
+    deleteThread,
+    addComment,
+    removeComment,
+} = require('../../controllers/thread-contoller');
+
+// import middleware
+const { authMiddleware } = require('../../utils/auth');
+
 router
     .route('/')
-    .get(getUsers)
+    .get(getThreads);
+
+router
+    .route('/signup')
     .post(createUser);
+
+router.route('/login').post(login);
 
 router
     .route('/:userId')
@@ -20,8 +38,10 @@ router
     .put(updateUser)
     .delete(deleteUser);
 
+router.route('/profile').get(authMiddleware, getOneUser);
+
 router
-    .route('/:userId/followers/:followerId')
+    .route('/profile/followers/:followerId')
     .post(addFollower)
     .delete(removeFollower);
 

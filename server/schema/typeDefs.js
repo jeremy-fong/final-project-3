@@ -15,6 +15,7 @@ const typeDefs = gql`
 
    type Thread {
     _id: ID
+    threadTitle: String
     threadText: String
     createdAt: String
     username: String
@@ -27,7 +28,7 @@ const typeDefs = gql`
       lastName: String
       email: String
       threads: [Thread]
-      followers: [User]
+      followerCount: Int
    }
 
    type Auth {
