@@ -8,7 +8,9 @@ function Navbar({placeholder, data}) {
     <div className='navbar'>
 
         <div className='leftSide'>
+            <Link to="/">
             <img src={logo} alt="logo" width="200px" heigth="100"/>
+            </Link>
         </div>
 
         <div className='search'>
