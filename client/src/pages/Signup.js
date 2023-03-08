@@ -40,9 +40,9 @@ function Signup(props) {
         <div className="flex-row space-between my-2">
           <label htmlFor="username">Username:</label>
           <input
-            placeholder="Last"
+            placeholder="username"
             name="username"
-            type="usnername"
+            type="username"
             id="username"
             onChange={handleChange}
           />
