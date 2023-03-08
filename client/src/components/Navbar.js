@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import '../styles/Navbar.css'
 import logo from '../assets/uforumitlogo.png';
 
-function Navbar({placeholder, data}) {
+import Auth from '../utils/auth';
+
+function Navbar({ placeholder, data }) {
+  //const [showModal, setShowModal] = useState(false);
+
   return (
     <div className='navbar'>
 
@@ -22,8 +26,10 @@ function Navbar({placeholder, data}) {
         </div>
 
         <div className='rightSide'>
+          <div className=''>
             <Link to='/signup'>Sign-up</Link>
             <Link to='/login'>Login</Link>
+          </div>
         </div>
 
       

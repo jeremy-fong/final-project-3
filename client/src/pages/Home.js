@@ -1,4 +1,6 @@
 import React from 'react';
+import About from '../components/About';
+import Thread from '../components/Thread';
 import '../styles/Home.css'
 
 
@@ -6,9 +8,8 @@ const Home = () => {
   
   return (
    <div>
-      <p>
-        hi how r u?
-      </p>
+      <About />
+      <Thread />
    </div>
   );
 };

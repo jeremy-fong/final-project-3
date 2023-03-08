@@ -3,8 +3,6 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
 
-
-
 import Home from "./pages/Home";
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -17,6 +15,7 @@ const client = new ApolloClient({
 
 
 function App() {
+
   return (
     <ApolloProvider client={client}>
       
