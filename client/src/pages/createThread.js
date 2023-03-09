@@ -58,13 +58,13 @@ const ThreadForm = () => {
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addThread, { error }] = useMutation(ADD_THREAD, {
-    update(cache, { data: { createThread } }) {
+    update(cache, { data: { addThread } }) {
       try {
         const { threads } = cache.readQuery({ query: QUERY_THREADS });
 
         cache.writeQuery({
           query: QUERY_THREADS,
-          data: { threads: [createThread, ...threads] },
+          data: { threads: [addThread, ...threads] },
         });
       } catch (e) {
         console.error(e);
@@ -74,7 +74,7 @@ const ThreadForm = () => {
       const { me } = cache.readQuery({ query: QUERY_ME });
       cache.writeQuery({
         query: QUERY_ME,
-        data: { me: { ...me, threads: [...me.threads, createThread] } },
+        data: { me: { ...me, threads: [...me.threads, addThread] } },
       });
     },
   });
