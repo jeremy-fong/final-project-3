@@ -37,3 +37,19 @@ export const ADD_THREAD = gql`
     }
   }
 `
+
+export const ADD_COMMENT = gql`
+  mutation addComment($thoughtId: ID!, $commentText: String!) {
+    addComment(threadId: $threadId, commentText: $commentText) {
+      _id
+      threadText
+      threadAuthor
+      createdAt
+      comments {
+        _id
+        commentText
+        createdAt
+      }
+    }
+  }
+`
