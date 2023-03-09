@@ -50,6 +50,8 @@ const typeDefs = gql`
       addUser(username: String!, email: String!, password: String!): Auth
       createThread(title: String!, body: String!): Thread
       addComment(threadId: ID!): Thread
+      removeThread(threadId: ID!): Thread
+      removeComment(threadId: ID!, commentId: ID!): Thread
    }
 
 `

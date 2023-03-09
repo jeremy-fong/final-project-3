@@ -43,20 +43,20 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        createThread: async (parent, { title, description }, context) => {
+        createThread: async (parent, { title, text }, context) => {
             if (context.user) {
-                const newThread = new Thread({
-                    user: context.user._id,
-                    username: context.user.username,
+                const thread = await Thread.create({
                     title,
-                    description,
-                    userPicturePath: user.picturePath,
-                    likes: {},
-                    comments: []
-                });
-                await newThread.save();
-
-                return newThread;
+                    text,
+                    thoughtAuthor: context.user.username,
+                  });
+          
+                  await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { threads: thread._id } }
+                  );
+          
+                  return thread;
             }
         },
         addComment: async (parent, { threadId, text }, context) => {
@@ -74,7 +74,40 @@ const resolvers = {
                     }
                 )
             }
-        }
+        },
+        removeThread: async (parent, { threadId }, context) => {
+            if (context.user) {
+              const thread = await Thread.findOneAndDelete({
+                _id: threadId,
+                thoughtAuthor: context.user.username,
+              });
+      
+              await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { threads: thread._id } }
+              );
+      
+              return thread;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        removeComment: async (parent, { threadId, commentId }, context) => {
+            if (context.user) {
+                return Thread.findOneAndUpdate(
+                    { _id: threadId },
+                    {
+                    $pull: {
+                        comments: {
+                        _id: commentId,
+                        commentAuthor: context.user.username,
+                        },
+                    },
+                    },
+                    { new: true }
+                );
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
     },
 }
 
