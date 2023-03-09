@@ -65,14 +65,10 @@ function Navbar({placeholder, data}) {
         <nav className='rightSide'>
             {showNavigation()}
         </nav>
-=========
         <div className='rightSide'>
             <Link to='/signup'>Sign-up</Link>
             <Link to='/login'>Login</Link>
-        </div>
->>>>>>>>> Temporary merge branch 2
-
-      
+        </div>      
     </div>
   )
 }
