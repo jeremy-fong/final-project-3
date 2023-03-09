@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@300;400;600&display=swap');
+
+.profileContainer {
+    display: flex;
+    margin: auto;
+    padding: 1rem;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.profileHeader {
+    font-family: 'Source Serif Pro', serif;
+    font-size: 40px;
+    background-color: #182A55;
+    padding: 15px;
+    border-radius: .4rem;
+    color: #fdf8f2;
+}

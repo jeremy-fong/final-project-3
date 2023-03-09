@@ -12,3 +12,9 @@
     height: fit-content;
     border: 5px solid darkslateblue;
 }
+
+.threads {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
