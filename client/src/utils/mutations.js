@@ -21,3 +21,18 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_THREAD = gql`
+  mutation addThread($threadText: String!) {
+    addThread(threadText: $threadText) {
+      _id
+      threadText
+      threadAuthor
+      createdAt
+      comments {
+        _id
+        commentText
+      }
+    }
+  }
+`;

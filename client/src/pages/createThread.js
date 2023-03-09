@@ -41,15 +41,14 @@
 // };
 
 // export default createThread;
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { ADD_THREAD } from '../../utils/mutations';
-import { QUERY_THREADS, QUERY_ME } from '../../utils/queries';
+import { ADD_THREAD } from '../utils/mutations';
+import { QUERY_THREADS, QUERY_ME } from '../utils/queries';
 
-import Auth from '../../utils/auth';
+import Auth from '../utils/auth';
 
 const ThreadForm = () => {
   const [threadText, setThreadText] = useState('');
