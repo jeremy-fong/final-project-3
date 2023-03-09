@@ -7,6 +7,8 @@ import Home from "./pages/Home";
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Navbar from './components/Navbar.js';
+import Profile from './pages/Profile';
+import CreateThread from './pages/createThread';
 
 import Auth from './utils/auth';
 
@@ -29,6 +31,8 @@ function App() {
             
             <Route exact path="login" element={<Login />} />
             <Route exact path="signup" element={<Signup />} />
+            <Route exact path="createthread" element={<CreateThread />} />
+            <Route exact path="profile" element={<Profile />} />
           </Routes>
 
         </div>

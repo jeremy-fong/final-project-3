@@ -36,9 +36,9 @@ function Login(props) {
       <h2>Login</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="Email">Email:</label>
           <input
-            placeholder="username"
+            placeholder="email"
             name="email"
             type="email"
             id="email"
