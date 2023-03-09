@@ -40,7 +40,7 @@ function Signup(props) {
           <input
             placeholder="Username"
             name="username"
-            type="usnername"
+            type="username"
             id="username"
             onChange={handleChange}
           />
