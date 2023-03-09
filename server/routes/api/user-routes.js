@@ -1,28 +1,18 @@
-const router = require('express').Router();
+const express = require('express');
 const {
-    getUsers,
-    getOneUser,
-    createUser,
-    updateUser,
-    deleteUser,
-    addFollower,
-    removeFollower
-} = require('../../controllers/user-controller');
+    getUser,
+    getUserFollowers,
+    addRemoveFollower
+} = require('../../controller/user-controller');
 
-router
-    .route('/')
-    .get(getUsers)
-    .post(createUser);
+const { signToken } = require('../../utils/auth');
 
-router
-    .route('/:userId')
-    .get(getOneUser)
-    .put(updateUser)
-    .delete(deleteUser);
+const router = express.Router();
 
-router
-    .route('/:userId/followers/:followerId')
-    .post(addFollower)
-    .delete(removeFollower);
+router.get('/:id', signToken, getUser);
+
+router.get('/:id/followers', signToken, getUserFollowers);
+
+router.patch('/:id/:followerId', signToken, addRemoveFollower);
 
 module.exports = router;

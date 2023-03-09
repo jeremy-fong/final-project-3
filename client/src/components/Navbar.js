@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import '../styles/Navbar.css'
 import logo from '../assets/uforumitlogo.png';
+
 import Auth from "../utils/auth";
 function Navbar({placeholder, data}) {
 
@@ -45,9 +46,6 @@ function Navbar({placeholder, data}) {
     }
   }
 
-
-
-
   return (
     <div className='navbar'>
 
@@ -64,7 +62,6 @@ function Navbar({placeholder, data}) {
           </div>
           <div className='dataResults'></div>
         </div>
-
         <nav className='rightSide'>
             {showNavigation()}
         </nav>

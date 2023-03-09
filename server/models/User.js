@@ -4,13 +4,12 @@ const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true
-    },
-
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true
+  },
   email: {
     type: String,
     required: true,
@@ -22,19 +21,17 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
-  threads: [
-    {
-        type: Schema.Types.ObjectId,
-        ref: 'Thread',
-    },
-  ],
-  followers: [
-    {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-    },
-]
-});
+  picturePath: {
+    type: String,
+    default: ''
+  },
+  followers: {
+    type: Array,
+    default: []
+  },
+},
+{ timestamps: true }
+);
 
 // set up pre-save middleware to create password
 userSchema.pre('save', async function(next) {

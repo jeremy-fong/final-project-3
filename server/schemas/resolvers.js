@@ -35,7 +35,7 @@ const resolvers = {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $addToSet: { createdThreads: threadId }},
+                    { $addToSet: { threads: Thread.threadId }},
                     { new: true }
                 )
                 return updatedUser;
