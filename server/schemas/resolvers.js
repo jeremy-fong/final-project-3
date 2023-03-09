@@ -30,21 +30,6 @@ const resolvers = {
 
             const token = signToken(user);
             return { token, user };
-        },
-        /*createThread: async (parent) => {
-            if (context.user) {
-                const updatedUser = await User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $addToSet: { threads: Thread.threadId }},
-                    { new: true }
-                )
-                const updatedThreads = await Thread.findAll();
-                return updatedUser;
-            }
-        },*/
-        getThreads: async (parent, args) => {
-            const allThreads = await Thread.findAll();
-            return allThreads;
         }
     },
 }
