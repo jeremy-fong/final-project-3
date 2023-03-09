@@ -47,7 +47,7 @@ const typeDefs = gql`
       login(email: String!, password: String!): Auth
       addUser(username: String!, email: String!, password: String!): Auth
       createThread(thread: threadIput): User
-      removeThread(threadId: String!): User
+      getThreads()
    }
 
 `

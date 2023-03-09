@@ -3,9 +3,7 @@ const path = require('path');
 const db = require('./config/connection');
 const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schemas')
-
-const userRoutes = require('./routes/api/user-routes');
-const threadRoutes = require('./routes/api/thread-routes');
+const { auth } = require('./utils/auth');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -14,9 +12,6 @@ const server = new ApolloServer({
   typeDefs,
   resolvers
 })
-
-app.use('/users', userRoutes);
-app.use('/threads', threadRoutes);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
