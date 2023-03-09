@@ -1,29 +1,26 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-   type Category {
-    _id: ID 
-    categoryTitle: String
-   }
-
-   type Comment {
-    _id: ID
-    commentBody: String
-    username: String
-    createdAt: String
-   }
-
    type Thread {
-    _id: ID
-    username: String
-    title: String
-    description: String
+      _id: ID
+      threadAuthor: String
+      title: String
+      text: String
+      comments: [Comment]!
+   }
+   type Comment {
+      _id: ID
+      commentText: String
+      commentAuthor: String
+      createdAt: String
    }
 
    type User {
       _id: ID
       username: String
       email: String
+      password: String
+      threads: [Thread]!
       picturePath: String
       followers: Int
    }
@@ -34,22 +31,18 @@ const typeDefs = gql`
    }
 
    type Query {
+      users: [User]
+      user(username: String!): User
+      threads(username: String!): [Thread]
+      thread(threadId: ID!): Thread
       me: User
-      getThreads: String
-      getThread: ID
-   }
-
-   input threadInput {
-      threadId: String
-      title: String
-      description: String
    }
 
    type Mutation {
       login(email: String!, password: String!): Auth
       addUser(username: String!, email: String!, password: String!): Auth
-      createThread(title: String!, body: String!): Thread
-      addComment(threadId: ID!): Thread
+      addThread(threadTitle: String!, threadText: String!): Thread
+      addComment(threadId: ID!, commentText: String!): Thread
       removeThread(threadId: ID!): Thread
       removeComment(threadId: ID!, commentId: ID!): Thread
    }

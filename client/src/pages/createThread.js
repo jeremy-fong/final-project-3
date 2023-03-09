@@ -52,18 +52,19 @@ import { QUERY_THREADS, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
 const ThreadForm = () => {
+  const [threadTitle, setThreadTitle] = useState('');
   const [threadText, setThreadText] = useState('');
 
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addThread, { error }] = useMutation(ADD_THREAD, {
-    update(cache, { data: { addThread } }) {
+    update(cache, { data: { createThread } }) {
       try {
         const { threads } = cache.readQuery({ query: QUERY_THREADS });
 
         cache.writeQuery({
           query: QUERY_THREADS,
-          data: { threads: [addThread, ...threads] },
+          data: { threads: [createThread, ...threads] },
         });
       } catch (e) {
         console.error(e);
@@ -73,7 +74,7 @@ const ThreadForm = () => {
       const { me } = cache.readQuery({ query: QUERY_ME });
       cache.writeQuery({
         query: QUERY_ME,
-        data: { me: { ...me, threads: [...me.threads, addThread] } },
+        data: { me: { ...me, threads: [...me.threads, createThread] } },
       });
     },
   });

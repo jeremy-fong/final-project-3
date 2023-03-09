@@ -4,22 +4,24 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
+        users: async (parent, args, context) => {
+            return User.find().populate('thoughts');
+        },
+        user: async (parent, { username }) => {
+            return User.findOne({ username }).populate('threads');
+        },
+        threads: async (parent, { username }) => {
+            const params = username ? { username } : {};
+            return Thought.find(params).sort({ createdAt: -1 });
+        },
+        thread: async (parent, { threadId }) => {
+            return Thought.findOne({ _id: threadId });
+        },
         me: async (parent, args, context) => {
-            const userData = await User.findOne({ _id: context.user._id })
-            .select('-__v -password')
-            return userData;
-        },
-        getThreads: async (parent) => {
-            const threads = await Thread.find();
-            return threads;
-        },
-        getThread: async (parent, { threadId }) => {
-            const thread = await Thread.findById(threadId);
-            if(thread){
-                return thread;
-            } else {
-                throw new Error('Thread not Found!');
+            if (context.user) {
+                return User.findOne({ _id: context.user._id }).populate('threads');
             }
+            throw new AuthenticationError('You need to be logged in!');
         }
     },
     Mutation: {
@@ -43,11 +45,11 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        createThread: async (parent, { title, text }, context) => {
+        addThread: async (parent, { threadTitle, threadText }, context) => {
             if (context.user) {
                 const thread = await Thread.create({
-                    title,
-                    text,
+                    threadTitle,
+                    threadText,
                     thoughtAuthor: context.user.username,
                   });
           
