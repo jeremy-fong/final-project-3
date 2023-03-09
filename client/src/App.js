@@ -8,11 +8,12 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Navbar from './components/Navbar.js';
 
+import Auth from './utils/auth';
+
 const client = new ApolloClient({
   uri: '/graphql',
   cache: new InMemoryCache(),
 });
-
 
 function App() {
 

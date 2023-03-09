@@ -1,15 +1,22 @@
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 const commentSchema = require('./Comment')
-const dateFormat = require('../utils/dateFormat');
 
 const threadSchema = new Schema(
     {
-        threadTitle: {
+        userId: {
+            type: String,
+            required: true
+        },
+        title: {
             type: String,
             required: 'Please try again!',
             maxlength: 25
         },
-        threadText: {
+        username: {
+            type: String,
+            required: true
+        },
+        description: {
             type: String,
             required: 'Please try again!',
             minlength: 25
@@ -17,11 +24,11 @@ const threadSchema = new Schema(
         createdAt: {
             type: Date
         },
-        username: {
-            type: String,
-            required: true
+        comments: {
+            type: Array,
+            default: []
         },
-        comments: [commentSchema]
+        userPicturePath: String,
     },
     {
         toJSON: {

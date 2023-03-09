@@ -15,8 +15,8 @@ const typeDefs = gql`
 
    type Thread {
     _id: ID
-    threadTitle: String
-    threadText: String
+    title: String
+    body: String
     createdAt: String
     username: String
    }

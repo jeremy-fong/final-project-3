@@ -1,48 +1,18 @@
-const router = require('express').Router();
+const express = require('express');
 const {
-    getUsers,
-    getOneUser,
-    createUser,
-    updateUser,
-    deleteUser,
-    addFollower,
-    removeFollower
-} = require('../../controllers/user-controller');
+    getUser,
+    getUserFollowers,
+    addRemoveFollower
+} = require('../../controller/user-controller');
 
-const {
-    getThreads,
-    getOneThread,
-    createThread,
-    updateThread,
-    deleteThread,
-    addComment,
-    removeComment,
-} = require('../../controllers/thread-contoller');
+const { signToken } = require('../../utils/auth');
 
-// import middleware
-const { authMiddleware } = require('../../utils/auth');
+const router = express.Router();
 
-router
-    .route('/')
-    .get(getThreads);
+router.get('/:id', signToken, getUser);
 
-router
-    .route('/signup')
-    .post(createUser);
+router.get('/:id/followers', signToken, getUserFollowers);
 
-router.route('/login').post(login);
-
-router
-    .route('/:userId')
-    .get(getOneUser)
-    .put(updateUser)
-    .delete(deleteUser);
-
-router.route('/profile').get(authMiddleware, getOneUser);
-
-router
-    .route('/profile/followers/:followerId')
-    .post(addFollower)
-    .delete(removeFollower);
+router.patch('/:id/:followerId', signToken, addRemoveFollower);
 
 module.exports = router;
