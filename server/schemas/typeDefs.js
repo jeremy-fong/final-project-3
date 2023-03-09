@@ -35,18 +35,21 @@ const typeDefs = gql`
 
    type Query {
       me: User
+      getThreads: String
+      getThread: ID
    }
 
    input threadInput {
+      threadId: String
       title: String
       description: String
-      threadId: String
    }
 
    type Mutation {
       login(email: String!, password: String!): Auth
       addUser(username: String!, email: String!, password: String!): Auth
-      createThread(thread: String): User
+      createThread(title: String!, body: String!): Thread
+      addComment(threadId: ID!): Thread
    }
 
 `

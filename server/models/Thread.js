@@ -1,5 +1,4 @@
 const { Schema } = require('mongoose');
-// const commentSchema = require('./Comment')
 
 const threadSchema = new Schema(
     {

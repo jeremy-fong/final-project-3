@@ -8,6 +8,18 @@ const resolvers = {
             const userData = await User.findOne({ _id: context.user._id })
             .select('-__v -password')
             return userData;
+        },
+        getThreads: async (parent) => {
+            const threads = await Thread.find();
+            return threads;
+        },
+        getThread: async (parent, { threadId }) => {
+            const thread = await Thread.findById(threadId);
+            if(thread){
+                return thread;
+            } else {
+                throw new Error('Thread not Found!');
+            }
         }
     },
     Mutation: {
@@ -31,6 +43,38 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
+        createThread: async (parent, { title, description }, context) => {
+            if (context.user) {
+                const newThread = new Thread({
+                    user: context.user._id,
+                    username: context.user.username,
+                    title,
+                    description,
+                    userPicturePath: user.picturePath,
+                    likes: {},
+                    comments: []
+                });
+                await newThread.save();
+
+                return newThread;
+            }
+        },
+        addComment: async (parent, { threadId, text }, context) => {
+            if (context.user) {
+                return Thread.findOneAndUpdate(
+                    { id: threadId },
+                    {
+                        $addToSet: {
+                            comments: { text, commentAuthor: context.user.username },
+                        }
+                    },
+                    {
+                        new: true,
+                        runValidators: true,
+                    }
+                )
+            }
+        }
     },
 }
 
