@@ -28,6 +28,10 @@ const threadSchema = new Schema(
             type: Array,
             default: []
         },
+        likes: {
+            type: Map,
+            of: Boolean
+        },
         userPicturePath: String,
     },
     {

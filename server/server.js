@@ -16,7 +16,7 @@ const server = new ApolloServer({
 })
 
 app.use('/users', userRoutes);
-//app.use('/threads', threadRoutes);
+app.use('/threads', threadRoutes);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

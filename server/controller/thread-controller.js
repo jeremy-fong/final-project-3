@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const { post } = require('../models/Thread');
 const Thread = require('../models/Thread');
 
 module.exports = {
@@ -43,9 +44,48 @@ module.exports = {
     },
     likeThread: async function (req, res) {
         try {
-            const { userId } = req.params;
-            const thread = await Thread.find({ userId });
-            res.status(200).json(thread);
+            const { id } = req.params;
+            const { userId } = req.body;
+            const thread = await Thread.find({ id });
+            const isLiked = thread.like.get(userId);
+
+            if (isLiked) {
+                thread.likes.delete(userId);
+            } else {
+                post.likes.set(userId, true);
+            }
+
+            const updatedThread = await Thread.findById(
+                id,
+                { likes: post.likes },
+                { new: true } 
+            )
+
+            res.status(200).json(updatedThread);
+        } catch (err) {
+            res.status(404).json({ message: err.message })
+        }
+    },
+    commentOnThread: async function (req, res) {
+        try {
+            const { id } = req.params;
+            const { userId } = req.body;
+            const thread = await Thread.find({ id });
+            const isLiked = thread.like.get(userId);
+
+            if (isLiked) {
+                thread.likes.delete(userId);
+            } else {
+                post.likes.set(userId, true);
+            }
+
+            const updatedThread = await Thread.findById(
+                id,
+                { likes: post.likes },
+                { new: true } 
+            )
+
+            res.status(200).json(updatedThread);
         } catch (err) {
             res.status(404).json({ message: err.message })
         }
