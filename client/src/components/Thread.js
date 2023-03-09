@@ -1,14 +1,14 @@
 import React from 'react';
 import '../styles/Thread.css';
 
-const getThreadsQuery = gql`
-  {
-    threads {
-      title
-      _id
-    }
-  }
-`
+// const getThreadsQuery = gql`
+//   {
+//     threads {
+//       title
+//       _id
+//     }
+//   }
+// `
 
 const Thread = () => {
   function genThreads() {
