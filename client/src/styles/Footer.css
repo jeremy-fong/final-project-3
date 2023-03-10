@@ -1,0 +1,23 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    padding: 12px;
+background-color: #182A55;
+}
+
+.footer > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.footer > small {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-weight: 100;
+
+}

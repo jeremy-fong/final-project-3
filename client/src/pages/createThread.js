@@ -53,7 +53,8 @@ import Auth from '../utils/auth';
 const ThreadForm = () => {
   const [threadTitle, setThreadTitle] = useState('');
   const [threadText, setThreadText] = useState('');
-
+  const [threadTitle, setThreadTitle] = useState('');
+  
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addThread, { error }] = useMutation(ADD_THREAD, {
@@ -110,24 +111,32 @@ const ThreadForm = () => {
     }
   };
 
+  const handleChangeTitle = (event) => {
+    const { name, value } = event.target;
+
+    if (name === 'threadTitle') {
+      setThreadTitle(value);
+    }
+  };
+
   return (
     <div>
-      <h3>Create A Thread!</h3>
-
+      <h3>Got Something To Say? Share it!</h3>
       {Auth.loggedIn() ? (
         <>
-          <p
-            className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
-            }`}
-          >
-            Character Count: {characterCount}/280
-          </p>
           <form
             className="flex-row justify-center justify-space-between-md align-center"
             onSubmit={handleFormSubmit}
           >
             <div className="col-12 col-lg-9">
+            <textarea
+                name="threadTitle"
+                placeholder="Thread Title..."
+                value={threadTitle}
+                className="form-input w-100"
+                style={{ lineHeight: '1.5', resize: 'vertical' }}
+                onChange={handleChangeTitle}
+              ></textarea>
               <textarea
                 name="threadTitle"
                 placeholder="Title"
@@ -144,6 +153,13 @@ const ThreadForm = () => {
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}
               ></textarea>
+                <p
+            className={`m-0 ${
+              characterCount === 280 || error ? 'text-danger' : ''
+            }`}
+          >
+            Character Count: {characterCount}/280
+          </p>
             </div>
 
             <div className="col-12 col-lg-3">
