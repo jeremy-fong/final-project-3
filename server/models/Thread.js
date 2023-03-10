@@ -1,10 +1,11 @@
-const { Schema } = require('mongoose');
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
 
 const threadSchema = new Schema(
     {
         userId: {
             type: String,
-            required: true
         },
         title: {
             type: String,
@@ -13,12 +14,10 @@ const threadSchema = new Schema(
         },
         username: {
             type: String,
-            required: true
         },
         description: {
             type: String,
             required: 'Please try again!',
-            minlength: 25
         },
         createdAt: {
             type: Date
@@ -58,4 +57,6 @@ threadSchema.virtual('commentCount').get(function () {
     return this.comments.length;
 })
 
-module.exports = threadSchema;
+const Thread =  mongoose.model('Thread', threadSchema);
+
+module.exports = Thread;
