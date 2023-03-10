@@ -23,8 +23,8 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_THREAD = gql`
-  mutation createThread(title: String!, description: String!) {
-    createThread(threadTitle: threadTitle, threadText: threadText) {
+  mutation addThread($threadTitle: String!, $threadText: String!) {
+    addThread(threadTitle: $threadTitle, threadText: $threadText) {
       _id
       threadTitle
       threadText
