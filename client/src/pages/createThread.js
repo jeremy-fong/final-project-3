@@ -51,6 +51,7 @@ import { QUERY_THREADS, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
 const ThreadForm = () => {
+  const [threadTitle, setThreadTitle] = useState('');
   const [threadText, setThreadText] = useState('');
 
   const [characterCount, setCharacterCount] = useState(0);
@@ -83,6 +84,7 @@ const ThreadForm = () => {
     try {
       const { data } = await addThread({
         variables: {
+          threadTitle,
           threadText,
           threadAuthor: Auth.getProfile().data.username,
         },
@@ -97,6 +99,11 @@ const ThreadForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
+    if (name === 'threadTitle' && value.length <= 280) {
+      setThreadTitle(value);
+      setCharacterCount(value.length);
+    }
+
     if (name === 'threadText' && value.length <= 280) {
       setThreadText(value);
       setCharacterCount(value.length);
@@ -105,7 +112,7 @@ const ThreadForm = () => {
 
   return (
     <div>
-      <h3>What's on your techy mind?</h3>
+      <h3>Create A Thread!</h3>
 
       {Auth.loggedIn() ? (
         <>
@@ -121,6 +128,14 @@ const ThreadForm = () => {
             onSubmit={handleFormSubmit}
           >
             <div className="col-12 col-lg-9">
+              <textarea
+                name="threadTitle"
+                placeholder="Title"
+                value={threadTitle}
+                className="form-input w-100"
+                style={{ lineHeight: '1.5', resize: 'vertical' }}
+                onChange={handleChange}
+              ></textarea>
               <textarea
                 name="threadText"
                 placeholder="Here's a new thread..."
