@@ -21,6 +21,12 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
+  threads: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Thread',
+    },
+  ],
   picturePath: {
     type: String,
     default: ''
