@@ -11,33 +11,33 @@ function Navbar({placeholder, data}) {
       return (
         <ul className="flex-row">
           <li className='mx-1'>
-            <Link to="/createthread">
+            <Link id='link' to="/createthread">
               +
             </Link>
           </li>
           <li className="mx-1">
-            <Link to="/profile">
+            <Link id='link' to="/profile">
               My Profile
             </Link>
           </li>
-          <li className="mx-1">
+          <line className="mx-1">
             {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-            <a href="/" onClick={() => Auth.logout()}>
+            <a id='link' href="/" onClick={() => Auth.logout()}>
               Logout
             </a>
-          </li>
+          </line>
         </ul>
       );
     } else {
       return (
         <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="/signup">
+          <li className="signup">
+            <Link id='link' to="/signup">
               Signup
             </Link>
           </li>
-          <li className="mx-1">
-            <Link to="/login">
+          <li className="signup">
+            <Link id='link' to="/login">
               Login
             </Link>
           </li>
