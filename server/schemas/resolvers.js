@@ -4,22 +4,24 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
+        users: async (parent, args, context) => {
+            return User.find().populate('thoughts');
+        },
+        user: async (parent, { username }) => {
+            return User.findOne({ username }).populate('threads');
+        },
+        threads: async (parent, { username }) => {
+            const params = username ? { username } : {};
+            return Thought.find(params).sort({ createdAt: -1 });
+        },
+        thread: async (parent, { threadId }) => {
+            return Thought.findOne({ _id: threadId });
+        },
         me: async (parent, args, context) => {
-            const userData = await User.findOne({ _id: context.user._id })
-            .select('-__v -password')
-            return userData;
-        },
-        getThreads: async (parent) => {
-            const threads = await Thread.find();
-            return threads;
-        },
-        getThread: async (parent, { threadId }) => {
-            const thread = await Thread.findById(threadId);
-            if(thread){
-                return thread;
-            } else {
-                throw new Error('Thread not Found!');
+            if (context.user) {
+                return User.findOne({ _id: context.user._id }).populate('threads');
             }
+            throw new AuthenticationError('You need to be logged in!');
         }
     },
     Mutation: {
@@ -43,22 +45,20 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        createThread: async (parent, { title, description }, context) => {
+        addThread: async (parent, { threadTitle, threadText }, context) => {
             if (context.user) {
-                const newThread = await Thread.create({
-                    user: context.user._id,
-                    username: context.user.username,
-                    title,
-                    description,
-                    userPicturePath: user.picturePath,
-                    likes: {},
-                    comments: []
-                });
-                await User.findOneAndUpdate(
+                const thread = await Thread.create({
+                    threadTitle,
+                    threadText,
+                    thoughtAuthor: context.user.username,
+                  });
+          
+                  await User.findOneAndUpdate(
                     { _id: context.user._id },
                     { $addToSet: { threads: thread._id } }
-                );
-                return newThread;
+                  );
+          
+                  return thread;
             }
         },
         addComment: async (parent, { threadId, text }, context) => {
@@ -76,7 +76,40 @@ const resolvers = {
                     }
                 )
             }
-        }
+        },
+        removeThread: async (parent, { threadId }, context) => {
+            if (context.user) {
+              const thread = await Thread.findOneAndDelete({
+                _id: threadId,
+                thoughtAuthor: context.user.username,
+              });
+      
+              await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { threads: thread._id } }
+              );
+      
+              return thread;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        removeComment: async (parent, { threadId, commentId }, context) => {
+            if (context.user) {
+                return Thread.findOneAndUpdate(
+                    { _id: threadId },
+                    {
+                    $pull: {
+                        comments: {
+                        _id: commentId,
+                        commentAuthor: context.user.username,
+                        },
+                    },
+                    },
+                    { new: true }
+                );
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
     },
 }
 
