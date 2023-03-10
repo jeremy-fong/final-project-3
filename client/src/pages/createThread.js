@@ -16,23 +16,23 @@ const ThreadForm = () => {
 
   const [addThread, { error }] = useMutation(ADD_THREAD, {
     update(cache, { data: { addThread } }) {
-      try {
-        const { threads } = cache.readQuery({ query: QUERY_THREADS });
+      // try {
+      //   const { threads } = cache.readQuery({ query: QUERY_THREADS });
 
-        cache.writeQuery({
-          query: QUERY_THREADS,
-          data: { threads: [addThread, ...threads] },
-        });
-      } catch (e) {
-        console.error(e);
-      }
+      //   cache.writeQuery({
+      //     query: QUERY_THREADS,
+      //     data: { threads: [addThread, ...threads] },
+      //   });
+      // } catch (e) {
+      //   console.error(e);
+      // }
 
-      // update me object's cache
-      const { me } = cache.readQuery({ query: QUERY_ME });
-      cache.writeQuery({
-        query: QUERY_ME,
-        data: { me: { ...me, threads: [...me.threads, addThread] } },
-      });
+      // // update me object's cache
+      // const { me } = cache.readQuery({ query: QUERY_ME });
+      // cache.writeQuery({
+      //   query: QUERY_ME,
+      //   data: { me: { ...me, threads: [...me.threads, addThread] } },
+      // });
     },
   });
 

@@ -41,7 +41,7 @@ const typeDefs = gql`
    type Mutation {
       login(email: String!, password: String!): Auth
       addUser(username: String!, email: String!, password: String!): Auth
-      addThread(threadTitle: String!, threadText: String!): Thread
+      addThread(title: String!, threadText: String!): Thread
       addComment(threadId: ID!, commentText: String!): Thread
       removeThread(threadId: ID!): Thread
       removeComment(threadId: ID!, commentId: ID!): Thread
