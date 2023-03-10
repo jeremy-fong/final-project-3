@@ -15,7 +15,7 @@ import Signup from './pages/Signup';
 import Navbar from './components/Navbar.js';
 import Profile from './pages/Profile';
 import CreateThread from './pages/createThread';
-
+import Footer from './components/Footer'
 // import Auth from './utils/auth';
 
 // Construct our main GraphQL API endpoint
@@ -60,7 +60,7 @@ function App() {
             <Route exact path="createthread" element={<CreateThread />} />
             <Route exact path="profile" element={<Profile />} />
           </Routes>
-
+          <Footer />
         </div>
       </Router>
 

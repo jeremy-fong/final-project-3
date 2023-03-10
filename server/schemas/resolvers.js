@@ -45,7 +45,7 @@ const resolvers = {
         },
         createThread: async (parent, { title, description }, context) => {
             if (context.user) {
-                const newThread = new Thread({
+                const newThread = await Thread.create({
                     user: context.user._id,
                     username: context.user.username,
                     title,
@@ -54,8 +54,10 @@ const resolvers = {
                     likes: {},
                     comments: []
                 });
-                await newThread.save();
-
+                await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { threads: thread._id } }
+                );
                 return newThread;
             }
         },
