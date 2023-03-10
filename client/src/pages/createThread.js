@@ -53,7 +53,7 @@ import Auth from '../utils/auth';
 const ThreadForm = () => {
   const [threadTitle, setThreadTitle] = useState('');
   const [threadText, setThreadText] = useState('');
-  const [threadTitle, setThreadTitle] = useState('');
+
   
   const [characterCount, setCharacterCount] = useState(0);
 
