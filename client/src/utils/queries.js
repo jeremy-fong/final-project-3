@@ -8,8 +8,8 @@ export const QUERY_USER = gql`
       email
       threads {
         _id
-        threadTitle
-        threadText
+        title
+        description
         username
         createdAt
       }
@@ -21,8 +21,8 @@ export const QUERY_THREADS = gql`
   query getThreads {
     threads {
       _id
-      threadTitle
-      threadText
+      title
+      description
       username
       createdAt
     }
@@ -33,8 +33,8 @@ export const QUERY_SINGLE_THREAD = gql`
   query getSingleThread($threadId: ID!) {
     thread(threadId: $threadId) {
       _id
-      threadTitle
-      threadText
+      title
+      description
       username
       createdAt
       comments {

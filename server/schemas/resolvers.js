@@ -45,12 +45,11 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        addThread: async (parent, { threadTitle, threadText }, context) => {
+        addThread: async (parent, { title, threadText }, context) => {
             if (context.user) {
                 const thread = await Thread.create({
-                    threadTitle,
-                    threadText,
-                    thoughtAuthor: context.user.username,
+                    title: title,
+                    description: threadText,
                   });
           
                   await User.findOneAndUpdate(

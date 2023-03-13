@@ -8,7 +8,7 @@ const Thread = () => {
     <div className='thread-container columns'>
         <div className='threads is-four-fifths d-flex justify-between'>
             <h2 className='title is-3 thr'>Threads:</h2>
-            <span className="right"><AiFillPlusCircle /></span>
+            {/* <span className="right"><AiFillPlusCircle /></span> */}
             <table className='table'>
               
             </table>

@@ -6,6 +6,7 @@ export const LOGIN = gql`
       token
       user {
         _id
+        username
       }
     }
   }
@@ -17,6 +18,7 @@ export const ADD_USER = gql`
       token
       user {
         _id
+        username
       }
     }
   }
@@ -24,12 +26,11 @@ export const ADD_USER = gql`
 
 export const ADD_THREAD = gql`
 
-  mutation addThread($threadTitle: String!, $threadText: String!) {
-    addThread(threadTitle: $threadTitle, threadText: $threadText) {
+  mutation addThread($title: String!, $threadText: String!) {
+    addThread(title: $title, threadText: $threadText) {
       _id
-      threadTitle
-      threadText
-      createdAt
+      title
+      text
       comments {
         _id
         commentText
@@ -44,16 +45,20 @@ export const ADD_COMMENT = gql`
     addComment(threadId: $threadId, commentText: $commentText) {
       _id
       threadText
+      threadTitle
       threadAuthor
       createdAt
       comments {
         _id
         commentText
-
         createdAt
       }
     }
   }
+<<<<<<< HEAD
 `
 
  
+=======
+`
+>>>>>>> 8381735a1aec83b081474a86f914b7bfc05be52e
