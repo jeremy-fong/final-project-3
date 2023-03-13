@@ -129,14 +129,7 @@ const ThreadForm = () => {
             onSubmit={handleFormSubmit}
           >
             <div className="col-12 col-lg-9">
-            <textarea
-                name="threadTitle"
-                placeholder="Thread Title..."
-                value={threadTitle}
-                className="form-input w-100"
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
-                onChange={handleChangeTitle}
-              ></textarea>
+            
               <textarea
                 name="threadTitle"
                 placeholder="Title"
