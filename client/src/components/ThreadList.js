@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/ThreadList.css';
+import { AiOutlineArrowDown } from 'react-icons/ai';
 
 const ThreadList = ({
   threads,
@@ -16,34 +18,37 @@ const ThreadList = ({
       {showTitle && <h3>{title}</h3>}
       {threads &&
         threads.map((thread) => (
-          <div key={thread._id} className="card mb-3">
-            <h4 className="card-header bg-primary text-light p-2 m-0">
+          <div key={thread._id} className="card">
+            <h4 className="cardHeader">
               {showUsername ? (
-                <Link
+                <>
+                <Link id='user'
                   className="text-light"
                   to={`/profiles/${thread.threadAuthor}`}
                 >
-                  {thread.threadAuthor} <br />
-                  <span style={{ fontSize: '1rem' }}>
-                    had this thread on {thread.createdAt}
-                  </span>
+                  {thread.threadAuthor}
                 </Link>
+                <span id='date'>
+                  posted on {thread.createdAt}
+                </span>
+                </>
               ) : (
                 <>
-                  <span style={{ fontSize: '1rem' }}>
-                    You had this thread on {thread.createdAt}
+                  <span>
+                    You posted on {thread.createdAt}
                   </span>
                 </>
               )}
             </h4>
-            <div className="card-body bg-light p-2">
-              <p>{thread.threadText}</p>
+            <div className="cardBody">
+              <h3>{thread.title}</h3>
+              <p>{thread.description}</p>
             </div>
             <Link
-              className="btn btn-primary btn-block btn-squared"
+              className="comment"
               to={`/threads/${thread._id}`}
             >
-              Join the discussion on this thread.
+              Comment<AiOutlineArrowDown id='icon'/>
             </Link>
           </div>
         ))}

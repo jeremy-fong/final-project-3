@@ -1,21 +1,21 @@
-const { User, Thread } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
+const { User, Thread } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        users: async (parent, args, context) => {
-            return User.find().populate('thoughts');
+        users: async () => {
+            return User.find().populate('threads');
         },
         user: async (parent, { username }) => {
             return User.findOne({ username }).populate('threads');
         },
         threads: async (parent, { username }) => {
             const params = username ? { username } : {};
-            return Thought.find(params).sort({ createdAt: -1 });
+            return Thread.find(params).sort({ createdAt: -1 });
         },
         thread: async (parent, { threadId }) => {
-            return Thought.findOne({ _id: threadId });
+            return Thread.findOne({ _id: threadId });
         },
         me: async (parent, args, context) => {
             if (context.user) {
@@ -25,10 +25,9 @@ const resolvers = {
         }
     },
     Mutation: {
-        addUser: async (parent, args) => {
-            const user = await User.create(args);
+        addUser: async (parent, { username, email, password }) => {
+            const user = await User.create({ username, email, password });
             const token = signToken(user);
-
             return { token, user };
         },
         login: async (parent, { email, password }) => {
@@ -45,11 +44,12 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        addThread: async (parent, { title, threadText }, context) => {
+        addThread: async (parent, { title, description }, context) => {
             if (context.user) {
                 const thread = await Thread.create({
                     title: title,
-                    description: threadText,
+                    description: description,
+                    threadAuthor: context.user.username,
                   });
           
                   await User.findOneAndUpdate(
@@ -80,7 +80,7 @@ const resolvers = {
             if (context.user) {
               const thread = await Thread.findOneAndDelete({
                 _id: threadId,
-                thoughtAuthor: context.user.username,
+                threadAuthor: context.user.username,
               });
       
               await User.findOneAndUpdate(

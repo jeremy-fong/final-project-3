@@ -1,0 +1,46 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    background-color: #182A55;
+    margin: 15px;
+}
+
+.cardBody {
+    padding: 0.5rem;
+}
+
+#icon{
+    padding-top: 5px;
+    font-size: larger;
+}
+
+#date {
+    float: right;
+    font-weight: lighter;
+    font-size: small;
+    color: #404258;
+}
+
+#user {
+    float: left;
+    color: #fdf8f2;
+}
+
+#user:hover {
+    text-decoration: none;
+    color: #87539b;
+}
+
+.comment {
+    color: #404258;
+    font-weight: lighter;
+    font-size: medium;
+}
+
+.comment:hover {
+    text-decoration: none;
+    color: #87539b;
+}

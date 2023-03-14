@@ -1,4 +1,38 @@
-.signup {
-    display: flex;
+.container {
     justify-content: center;
+    background-color: #182A55;
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    width: 30%;
+}
+
+#signForm {
+    display: inline-block;
+}
+
+#signBtn {
+    background-color: #87539b;
+    margin: 10px;
+}
+
+#signBtn:hover {
+    background-color: #abc13a;
+}
+
+#signLink {
+    color: #87539b;
+}
+
+#signLink:hover {
+    color: #abc13a;
+    text-decoration: none;
+}
+#signTitle {
+    font-size: larger;
+    font-weight: bold;
+}
+
+#card {
+    margin: auto;
 }

@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@300;400;600&display=swap');
 
 .profileContainer {
-    display: flex;
+    /* display: flex; */
     margin: auto;
     padding: 1rem;
     justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
+    /* flex-direction: row; */
+    /* flex-wrap: wrap; */
 }
 
 .profileHeader {
@@ -16,4 +16,7 @@
     padding: 15px;
     border-radius: .4rem;
     color: #fdf8f2;
+    text-align: center;
+    margin-left: 30vw;
+    margin-right: 30vw;
 }

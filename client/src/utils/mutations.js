@@ -26,33 +26,34 @@ export const ADD_USER = gql`
 
 export const ADD_THREAD = gql`
 
-  mutation addThread($title: String!, $threadText: String!) {
-    addThread(title: $title, threadText: $threadText) {
+  mutation addThread($title: String!, $description: String!) {
+    addThread(title: $title, description: $description) {
       _id
       title
-      text
-      comments {
-        _id
-        commentText
-        createdAt
-      }
-    }
-  }
-`
-
-export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(threadId: $threadId, commentText: $commentText) {
-      _id
-      threadText
-      threadTitle
+      description
       threadAuthor
       createdAt
       comments {
         _id
         commentText
-        createdAt
       }
     }
   }
 `
+
+// export const ADD_COMMENT = gql`
+//   mutation addComment($threadId: ID!, $commentText: String!) {
+//     addComment(threadId: $threadId, commentText: $commentText) {
+//       _id
+//       threadText
+//       threadTitle
+//       threadAuthor
+//       createdAt
+//       comments {
+//         _id
+//         commentText
+//         createdAt
+//       }
+//     }
+//   }
+// `
