@@ -4,9 +4,6 @@ import Thread from '../components/Thread';
 import '../styles/Home.css'
 import { useQuery } from '@apollo/client';
 import ThreadList from '../components/ThreadList';
-// import ThreadList from '../components/ThreadList';
-// import ThreadForm from '../components/ThreadForm';
-
 import { QUERY_THREADS } from '../utils/queries';
 
 const Home = () => {
@@ -16,14 +13,14 @@ const Home = () => {
   return (
    <div>
       <About />
-      <Thread />
-      <div className="col-12 col-md-8 mb-3">
+      {/* <Thread /> */}
+      <div className="col-12 col-md-8 home">
           {loading ? (
             <div>Loading...</div>
           ) : (
             <ThreadList
               threads={threads}
-              title="Some Feed for Thread(s)..."
+              title="Checkout the latest threads:"
             />
           )}
         </div>

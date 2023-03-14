@@ -1,26 +1,25 @@
-const mongoose = require('mongoose');
-
-const { Schema } = mongoose;
-
+const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 const threadSchema = new Schema(
     {
-        userId: {
-            type: String,
-        },
         title: {
             type: String,
             required: 'Please try again!',
             maxlength: 25
         },
-        username: {
+        threadAuthor: {
             type: String,
+            required: true,
+            trim: true,
         },
         description: {
             type: String,
             required: 'Please try again!',
         },
         createdAt: {
-            type: Date
+            type: Date,
+            default: Date.now,
+            get: (timestamp) => dateFormat(timestamp),
         },
         comments: [
             {
@@ -35,7 +34,9 @@ const threadSchema = new Schema(
                     required: true,
                 },
                 createdAt: {
-                    type: Date
+                    type: Date,
+                    default: Date.now,
+                    get: (timestamp) => dateFormat(timestamp),
                 },
             },
         ],
@@ -57,6 +58,6 @@ threadSchema.virtual('commentCount').get(function () {
     return this.comments.length;
 })
 
-const Thread =  mongoose.model('Thread', threadSchema);
+const Thread =  model('Thread', threadSchema);
 
 module.exports = Thread;

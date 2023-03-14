@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/Thread.css';
-import { AiFillPlusCircle } from 'react-icons/ai';
+// import { AiFillPlusCircle } from 'react-icons/ai';
 
 const Thread = () => {
 

@@ -16,6 +16,7 @@ import Navbar from './components/Navbar.js';
 import Profile from './pages/Profile';
 import CreateThread from './pages/createThread';
 import Footer from './components/Footer'
+import SingleThread from './pages/SingleThread';
 // import Auth from './utils/auth';
 
 // Construct our main GraphQL API endpoint
@@ -50,7 +51,6 @@ function App() {
       
       <Router>
         <div>
-
           <Navbar placeholder='search uforumit'/>
           <Routes>
             <Route exact path="/" element={<Home />} />
@@ -58,7 +58,10 @@ function App() {
             <Route exact path="login" element={<Login />} />
             <Route exact path="signup" element={<Signup />} />
             <Route exact path="createthread" element={<CreateThread />} />
-            <Route exact path="profile" element={<Profile />} />
+            {/* <Route exact path="profile" element={<Profile />} /> */}
+            <Route path="/me" element={<Profile />} />
+            <Route path="/profile/:username" element={<Profile />} />
+            <Route path="/threads/:threadId" element={<SingleThread />} />
           </Routes>
           <Footer />
         </div>

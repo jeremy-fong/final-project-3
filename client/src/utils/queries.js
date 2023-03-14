@@ -10,7 +10,6 @@ export const QUERY_USER = gql`
         _id
         title
         description
-        username
         createdAt
       }
     }
@@ -23,7 +22,7 @@ export const QUERY_THREADS = gql`
       _id
       title
       description
-      username
+      threadAuthor
       createdAt
     }
   }
@@ -35,12 +34,12 @@ export const QUERY_SINGLE_THREAD = gql`
       _id
       title
       description
-      username
+      threadAuthor
       createdAt
       comments {
         _id
-        commentBody
-        username
+        commentText
+        commentAuthor
         createdAt
       }
     }
@@ -53,6 +52,13 @@ export const QUERY_ME = gql`
       _id
       username
       email
+      threads {
+        _id
+        title
+        description
+        threadAuthor
+        createdAt
+      }
     }
   }
 `;

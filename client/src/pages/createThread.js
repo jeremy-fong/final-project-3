@@ -9,30 +9,30 @@ import { QUERY_THREADS, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
 const ThreadForm = () => {
-  const [threadText, setThreadText] = useState('');
-  const [threadTitle, setThreadTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState('');
   
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addThread, { error }] = useMutation(ADD_THREAD, {
     update(cache, { data: { addThread } }) {
-      // try {
-      //   const { threads } = cache.readQuery({ query: QUERY_THREADS });
+      try {
+        const { threads } = cache.readQuery({ query: QUERY_THREADS });
 
-      //   cache.writeQuery({
-      //     query: QUERY_THREADS,
-      //     data: { threads: [addThread, ...threads] },
-      //   });
-      // } catch (e) {
-      //   console.error(e);
-      // }
+        cache.writeQuery({
+          query: QUERY_THREADS,
+          data: { threads: [addThread, ...threads] },
+        });
+      } catch (e) {
+        console.error(e);
+      }
 
-      // // update me object's cache
-      // const { me } = cache.readQuery({ query: QUERY_ME });
-      // cache.writeQuery({
-      //   query: QUERY_ME,
-      //   data: { me: { ...me, threads: [...me.threads, addThread] } },
-      // });
+      // update me object's cache
+      const { me } = cache.readQuery({ query: QUERY_ME });
+      cache.writeQuery({
+        query: QUERY_ME,
+        data: { me: { ...me, threads: [...me.threads, addThread] } },
+      });
     },
   });
 
@@ -42,13 +42,14 @@ const ThreadForm = () => {
     try {
       const { data } = await addThread({
         variables: {
-          threadText,
-          threadTitle,
+          description,
+          title,
           threadAuthor: Auth.getProfile().data.username,
         },
       });
-
-      setThreadText('');
+      
+      setDescription('');
+      setTitle('');
     } catch (err) {
       console.error(err);
     }
@@ -57,8 +58,8 @@ const ThreadForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'threadText' && value.length <= 280) {
-      setThreadText(value);
+    if (name === 'description' && value.length <= 280) {
+      setDescription(value);
       setCharacterCount(value.length);
     }
   };
@@ -66,8 +67,8 @@ const ThreadForm = () => {
   const handleChangeTitle = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'threadTitle') {
-      setThreadTitle(value);
+    if (name === 'title') {
+      setTitle(value);
     }
   };
 
@@ -85,18 +86,18 @@ const ThreadForm = () => {
           >
             <div className="addThread">
             <textarea
-                name="threadTitle"
+                name="title"
                 placeholder="Thread Title..."
-                value={threadTitle}
+                value={title}
                 className="formTitle  w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChangeTitle}
               ></textarea>
               <br></br>
               <textarea
-                name="threadText"
+                name="description"
                 placeholder="Here's a new thread..."
-                value={threadText}
+                value={description}
                 className="formText  w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}

@@ -3,6 +3,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import '../styles/Profile.css';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
+import ThreadList from '../components/ThreadList';
 
 import Auth from '../utils/auth';
 
@@ -14,7 +15,6 @@ const Profile = () => {
   });
 
   const user = data?.me || data?.user || {};
-  // navigate to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to="/me" />;
   }
@@ -38,8 +38,6 @@ const Profile = () => {
         <h2 className="profileHeader">
           {`${user.username}'s`} Profile!
         </h2>
-
-
         <div className="">
           {/* add create thread */}
         </div>
@@ -48,6 +46,12 @@ const Profile = () => {
             className=""
           >
             {/* add thread list */}
+            <ThreadList
+            threads={user.threads}
+            title={`${user.username}'s threads...`}
+            showTitle={false}
+            showUsername={false}
+          />
           </div>
         )}
       </div>

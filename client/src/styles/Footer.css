@@ -1,11 +1,11 @@
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100vw;
     padding: 12px;
-background-color: #182A55;
+    background-color: #182A55;
 }
 
 .footer > div {

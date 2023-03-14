@@ -16,7 +16,7 @@ function Navbar({placeholder, data}) {
             </Link>
           </li>
           <li className="mx-1">
-            <Link id='link' to="/profile">
+            <Link id='link' to="/me">
               My Profile
             </Link>
           </li>
